@@ -1,0 +1,28 @@
+/* Navbar */
+nav {
+    background-color: #c00a27;
+}
+
+header {
+    height: 25rem;
+    background-image: url('https://m2.alothemes.com/pizzaro/media/magiccart/magicslider/s/l/slide1-demo2.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+@media all and (min-width: 992px) {
+    nav {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        background-color: transparent;
+    }
+
+    header {
+        height: 70vh;
+    }
+}
+
+/* <--- Navbar --/> */
