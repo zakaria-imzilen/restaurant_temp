@@ -1,28 +1,140 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@200;300;400;500;600;700&display=swap");
+
 /* Navbar */
+nav,
+.allDishesSection {
+	background-color: #c00a27;
+}
+
 nav {
-    background-color: #c00a27;
+	z-index: 10;
 }
 
 header {
-    height: 25rem;
-    background-image: url('https://m2.alothemes.com/pizzaro/media/magiccart/magicslider/s/l/slide1-demo2.jpg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+	height: 13rem;
+	background-image: url("https://m2.alothemes.com/pizzaro/media/magiccart/magicslider/s/l/slide1-demo2.jpg");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.menu-toggler {
+	cursor: pointer;
+}
+
+@media all and (min-width: 532px) {
+	header {
+		height: 25rem;
+	}
 }
 
 @media all and (min-width: 992px) {
-    nav {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        background-color: transparent;
-    }
+	nav {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		background-color: transparent;
+	}
 
-    header {
-        height: 70vh;
-    }
+	header {
+		height: 70vh;
+	}
 }
 
 /* <--- Navbar --/> */
+
+/* Header */
+header h1 {
+	font-size: 7vw;
+	font-family: "Oswald", sans-serif;
+	font-weight: 300;
+	text-transform: uppercase;
+	text-shadow: 1px 0px 1px #cccccc41, 0px 1px 1px #eeeeee62, 2px 1px 1px #cccccc,
+		1px 2px 1px #eeeeee, 3px 2px 1px #cccccc, 2px 3px 1px #eeeeee,
+		4px 3px 1px #cccccc;
+}
+header h2 {
+	font-size: 5vw;
+	font-weight: 200;
+	text-transform: uppercase;
+	text-shadow: #474747 15px 5px 2px;
+}
+
+.menu-mobile {
+	z-index: 12;
+	height: 100vh;
+	width: 100vw;
+}
+
+/* <--- Header --/> */
+
+/* AllDishesSection */
+.allDishesSection {
+	z-index: 9;
+}
+.allDishesSection-content {
+	width: 25rem !important;
+}
+/* <--- AllDishesSection --/> */
+
+/* Chicken Burger */
+.chickenBurger {
+	min-height: 30rem;
+	background-image: url("https://m2.alothemes.com/pizzaro/media/wysiwyg/alothemes/static/demo2/img6-full.jpg");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.chickenBurger-content {
+	max-width: 25rem !important;
+}
+
+@media all and (min-width: 1073px) {
+	.chickenBurger {
+		padding-left: 10vw !important;
+	}
+}
+
+.chickenBurger .titles {
+	font-family: "Yanone Kaffeesatz";
+}
+
+.chickenBurger .titles h1 {
+	font-size: 8rem;
+	line-height: 0.8;
+}
+
+/* <--- Chicken Burger --/> */
+
+/* Footer */
+
+footer {
+	background-color: #f52d4e;
+}
+
+footer p,
+footer h6 {
+	font-size: 0.7rem;
+}
+
+footer .form {
+	max-width: 23rem;
+}
+
+footer .contact-info-wrapper {
+	width: 80vw;
+}
+
+@media (min-width: 992px) {
+	footer .form {
+		margin-top: -15rem;
+	}
+	footer .contact-info-wrapper {
+		width: 33.333333%;
+	}
+}
+
+/* <! --- Footer --> */
