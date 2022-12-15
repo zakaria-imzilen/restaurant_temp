@@ -11,6 +11,20 @@ nav {
 	z-index: 10;
 }
 
+.orderIcon,
+.MuiSvgIcon-root {
+	cursor: pointer;
+}
+
+.cart-menu-item {
+	max-width: 23rem;
+}
+
+.cart-menu-item p,
+.cart-menu-item span {
+	font-size: 0.7rem;
+}
+
 header {
 	height: 13rem;
 	background-image: url("https://m2.alothemes.com/pizzaro/media/magiccart/magicslider/s/l/slide1-demo2.jpg");

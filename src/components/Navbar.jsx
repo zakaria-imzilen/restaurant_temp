@@ -3,17 +3,19 @@ import LocalShippingIcon from "@material-ui/icons/LocalShipping";
 import { Badge, MenuItem, MenuList } from "@material-ui/core";
 import MenuRoundedIcon from "@material-ui/icons/MenuRounded";
 import Paper from "@mui/material/Paper";
-// import MenuList from "@mui/material/MenuList";
-// import MenuItem from "@mui/material/MenuItem";
-import ListItemText from "@mui/material/ListItemText";
 import CancelIcon from "@mui/icons-material/Cancel";
-import { Typography } from "@mui/material";
+import { Dialog, ListItemText, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../store/features/Navbar";
+import { useState } from "react";
+import CartMenu from "./CartMenu";
+import { Cancel } from "@material-ui/icons";
 
 const Navbar = () => {
 	const navbarRed = useSelector((state) => state.navbar);
 	const dispatch = useDispatch();
+
+	const [cartMenu, setCartMenu] = useState(false);
 
 	return (
 		<nav className="container-fluid py-3 p-lg-4">
@@ -31,16 +33,37 @@ const Navbar = () => {
 					/>
 				</div>
 				<div className="col-12 d-flex justify-content-end align-items-center gap-5 col-lg-4 text-center">
-					<Badge badgeContent={4} color="error" overlap="rectangular">
+					<Badge
+						badgeContent={4}
+						color="error"
+						overlap="rectangular"
+						className="orderIcon position-relative"
+						onClick={() => setCartMenu(true)}
+					>
 						<LocalShippingIcon fontSize="large" style={{ color: "white" }} />
 					</Badge>
+					<Dialog onClose={() => setCartMenu(false)} open={cartMenu}>
+						<div
+							className="py-4 cart-menu rounded-2 container col bg-light position-relative"
+							style={{ zIndex: 12 }}
+						>
+							<CartMenu />
+							<CartMenu />
+							<Cancel
+								className="position-absolute top-0 end-0 mt-2 me-2"
+								style={{ zIndex: 13 }}
+								color="error"
+								onClick={() => setCartMenu(false)}
+							/>
+						</div>
+					</Dialog>
 					<MenuRoundedIcon
 						className="d-lg-none pe-auto menu-toggler"
 						fontSize="large"
 						style={{ color: "white" }}
 						onClick={() => dispatch(toggleMenu())}
 					/>
-					<span className="text-light">Sign In</span>
+					{/* <span className="text-light">Sign In</span> */}
 					{/* Menu (only in mobile screen */}
 					<div
 						style={{
@@ -66,7 +89,7 @@ const Navbar = () => {
 							<MenuList>
 								<MenuItem>
 									<ListItemText className="w-100 text-center">
-										<Typography fontSize={46}>Cart</Typography>
+										<Typography fontSize={46}>Sign in/up</Typography>
 									</ListItemText>
 								</MenuItem>
 								<MenuItem>
