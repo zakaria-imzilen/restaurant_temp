@@ -1,0 +1,33 @@
+.profile_page {
+	background-color: rgb(17, 17, 17);
+}
+
+.profile_page .header-profile {
+	height: 40vh;
+	background-image: url("https://img.freepik.com/free-photo/old-black-background-grunge-texture-dark-wallpaper-blackboard-chalkboard-room-wall_1258-28313.jpg?t=st=1671147998~exp=1671148598~hmac=077b5f6ac3483b7b53b94cacaf7d8ae412300dd6730641196ea7230e3457adf2");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.profile_page .list-group-item span.text-secondary {
+	font-size: 0.8rem;
+}
+
+.info-content {
+	height: min-content;
+}
+
+.info-content p {
+	font-size: 0.8rem;
+}
+
+@media all and (min-width: 920px) {
+	.profile_page .header-profile {
+		height: 60vh;
+	}
+
+	.profile_page {
+		height: 100vh;
+	}
+}

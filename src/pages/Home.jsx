@@ -7,7 +7,7 @@ import "../css/Home.css";
 
 const Home = () => {
 	return (
-		<div className="home-page">
+		<div className="home-page" data-aos="fade-in">
 			<Navbar />
 			<Header />
 			<AllDishesSection />

@@ -10,10 +10,13 @@ import { toggleMenu } from "../store/features/Navbar";
 import { useState } from "react";
 import CartMenu from "./CartMenu";
 import { Cancel } from "@material-ui/icons";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
 	const navbarRed = useSelector((state) => state.navbar);
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
+	const loc = useLocation();
 
 	const [cartMenu, setCartMenu] = useState(false);
 
@@ -21,12 +24,21 @@ const Navbar = () => {
 		<nav className="container-fluid py-3 p-lg-4">
 			<div className="container mx-auto row gap-5 gap-lg-0 justify-content-center align-items-center">
 				<div className="col-12 col-lg-4 d-flex gap-3 justify-content-start text-center">
-					<PersonIcon style={{ color: "white" }} />
+					{!loc.pathname.includes("profile") && (
+						<PersonIcon
+							style={{ color: "white" }}
+							onClick={() => navigate("/profile")}
+						/>
+					)}
 					<span className="text-light d-none d-lg-block">About</span>
 					<span className="text-light d-none d-lg-block">Cart</span>
 					<span className="text-light d-none d-lg-block">Contact US</span>
 				</div>
-				<div className="col-12 col-lg-4 text-center">
+				<div
+					className="col-12 col-lg-4 text-center"
+					onClick={() => navigate("/")}
+					style={{ cursor: "pointer" }}
+				>
 					<img
 						src="https://m2.alothemes.com/pizzaro/media/logo/stores/4/logo.png"
 						alt=""
