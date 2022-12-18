@@ -9,10 +9,11 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import ShoppingBasketOutlinedIcon from "@mui/icons-material/ShoppingBasketOutlined";
 import { useEffect, useState } from "react";
 import { Button } from "@mui/material";
 import Footer from "../components/Footer";
+import DishCardList from "../components/DishCardList";
+import DishCardGrid from "../components/DishCardGrid";
 
 const DishCategory = () => {
 	const data = [
@@ -144,32 +145,7 @@ const DishCategory = () => {
 				<div className="listView container-lg d-flex flex-column justify-content-center align-content-center">
 					{view == 1 &&
 						newData.length > 0 &&
-						newData.map((dish) => (
-							<div
-								key={dish.id}
-								className="dishCard w-100 py-5 px-0 px-md-3 row align-content-center align-items-center border-bottom border-secondary justify-content-center"
-							>
-								<div className="dishImg col-12 col-md-4 text-center">
-									<img src={dish.img} />
-								</div>
-								<div className="dishContent col-12 col-md-8">
-									<h3>{dish.title}</h3>
-									<p className="text-secondary" style={{ maxWidth: "24rem" }}>
-										{dish.desc}
-									</p>
-									<Button variant="text">LEARN MORE</Button>
-									<h3 className="mb-3">${dish.price}</h3>
-									<Button
-										startIcon={<ShoppingBasketOutlinedIcon />}
-										className="rounded-5"
-										variant="contained"
-										color="error"
-									>
-										ADD TO CART
-									</Button>
-								</div>
-							</div>
-						))}
+						newData.map((dish) => <DishCardList key={dish.key} dish={dish} />)}
 				</div>
 				{/* /**** List view */}
 
@@ -177,31 +153,11 @@ const DishCategory = () => {
 				<div className="gridView my-5 py-5 container-lg row justify-content-center gap-0 gap-md-2 gap-lg-3">
 					{view == 0 &&
 						newData.length > 0 &&
-						newData.map((dish) => (
-							<div
-								key={dish.id}
-								className="dishCard hovered col-6 col-md-3 col-lg-2 text-center"
-							>
-								<img src={dish.img} width={150} alt="" />
-								<h5 className="fs-6">{dish.title}</h5>
-								<span className="text-secondary fs-6">${dish.price}</span>
-								<div className="dishCardOnHover">
-									<p>{dish.desc}</p>
-
-									<Button
-										variant="contained"
-										color="error"
-										className="rounded-5"
-									>
-										Add To Cart
-									</Button>
-								</div>
-							</div>
-						))}
+						newData.map((dish) => <DishCardGrid key={dish.id} dish={dish} />)}
 				</div>
 				{/* *** Grid View */}
 			</div>
-
+			<div className="heightBlanket d-none d-lg-block"></div>
 			<Footer />
 		</div>
 	);

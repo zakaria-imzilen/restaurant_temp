@@ -26,3 +26,7 @@ a {
 	color: #000;
 	transform: scale(0.95);
 }
+
+.heightBlanket {
+	height: 10rem;
+}
