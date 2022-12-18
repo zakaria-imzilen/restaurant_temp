@@ -1,8 +1,20 @@
+import { useLocation, useNavigate } from "react-router-dom";
+
 const AllDishesSection = () => {
+	const navigate = useNavigate();
+	const loc = useLocation();
+
 	return (
 		<section className="py-4 px-5 allDishesSection position-sticky top-0 text-light container-fluid d-none d-md-block">
-			<div className="container allDishesSection-content d-md-flex justify-content-center gap-lg-3">
-				<div className="row gap-2 align-items-center justify-content-center text-center">
+			<div
+				className={`${
+					loc.pathname.includes("category") && "border-top border-light pt-3"
+				} container allDishesSection-content d-md-flex justify-content-center gap-lg-3`}
+			>
+				<div
+					onClick={() => navigate("/category")}
+					className="hovered row gap-2 align-items-center justify-content-center text-center"
+				>
 					<div className="col-12">
 						<img
 							src="https://m2.alothemes.com/pizzaro/media/magiccart/magicmenu/thumbnail/3.png"
@@ -11,7 +23,10 @@ const AllDishesSection = () => {
 					</div>
 					<span className="col-12">Pizza</span>
 				</div>
-				<div className="row gap-2 align-items-center justify-content-center text-center">
+				<div
+					onClick={() => navigate("/category")}
+					className="hovered row gap-2 align-items-center justify-content-center text-center"
+				>
 					<div className="col-12">
 						<img
 							src="https://m2.alothemes.com/pizzaro/media/magiccart/magicmenu/thumbnail/4.png"
@@ -20,7 +35,10 @@ const AllDishesSection = () => {
 					</div>
 					<span className="col-12">Burger</span>
 				</div>
-				<div className="row gap-2 align-items-center justify-content-center text-center">
+				<div
+					onClick={() => navigate("/category")}
+					className="hovered row gap-2 align-items-center justify-content-center text-center"
+				>
 					<div className="col-12">
 						<img
 							src="https://m2.alothemes.com/pizzaro/media/magiccart/magicmenu/thumbnail/5.png"
@@ -29,7 +47,10 @@ const AllDishesSection = () => {
 					</div>
 					<span className="col-12">Chicken</span>
 				</div>
-				<div className="row gap-2 align-items-center justify-content-center text-center">
+				<div
+					onClick={() => navigate("/category")}
+					className="hovered row gap-2 align-items-center justify-content-center text-center"
+				>
 					<div className="col-12">
 						<img
 							src="https://m2.alothemes.com/pizzaro/media/magiccart/magicmenu/thumbnail/6.png"

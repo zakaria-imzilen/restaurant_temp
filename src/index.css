@@ -12,3 +12,17 @@ a {
 	color: inherit !important;
 	text-decoration: none !important;
 }
+
+.hovered {
+	cursor: pointer;
+}
+
+/* Section: AllDishesSection */
+.allDishesSection .hovered.row {
+	transition: all 0.2s ease-in;
+}
+.allDishesSection .hovered.row:hover {
+	transition: all 0.2s ease-in;
+	color: #000;
+	transform: scale(0.95);
+}

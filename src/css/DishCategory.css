@@ -1,0 +1,37 @@
+@media all and (min-width: 992px) {
+	nav {
+		position: static !important;
+		background-color: #c00a27 !important;
+	}
+}
+
+.filtering-section span {
+	font-size: 0.8rem;
+}
+
+.dishCardOnHover {
+	display: none;
+}
+
+.dishCardOnHover p {
+	font-size: 0.8rem;
+}
+
+.dishCard.hovered {
+	transition: all 0.2s ease-in;
+}
+
+.dishCard.hovered:hover {
+	position: relative;
+	transform: scale(1.01);
+	transition: all 0.2s ease-in;
+}
+
+.dishCard.hovered:hover .dishCardOnHover {
+	position: absolute;
+	display: block;
+}
+.dishCard.hovered:hover > h5,
+.dishCard.hovered:hover > span {
+	display: none;
+}
