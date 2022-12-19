@@ -14,66 +14,99 @@ import { Button } from "@mui/material";
 import Footer from "../components/Footer";
 import DishCardList from "../components/DishCardList";
 import DishCardGrid from "../components/DishCardGrid";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const DishCategory = () => {
-	const data = [
-		{
-			id: 1,
-			title: "Another Sample Top",
-			desc: "Beef Patty, Bun, All-Natural Bacon, American Cheese, Swiss Cheese, Dippin' Sauce",
-			price: 2.3,
-			img: "https://m2.alothemes.com/pizzaro/media/catalog/product/cache/9d3f9ef024f4ce26174bdb3b34be3e5d/1/0/10_6.jpg",
-		},
-		{
-			id: 2,
-			title: "The Net in",
-			desc: "Beef Patty, Bun, All-Natural Bacon, American Cheese, Swiss Cheese, Dippin' Sauce",
-			price: 1.3,
-			img: "https://m2.alothemes.com/pizzaro/media/catalog/product/cache/9d3f9ef024f4ce26174bdb3b34be3e5d/9/_/9_7.jpg",
-		},
-		{
-			id: 3,
-			title: "Quisque neque",
-			desc: "Beef Patty, Bun, All-Natural Bacon, American Cheese, Swiss Cheese, Dippin' Sauce",
-			price: 3.5,
-			img: "https://m2.alothemes.com/pizzaro/media/catalog/product/cache/9d3f9ef024f4ce26174bdb3b34be3e5d/1/1/11_1.png",
-		},
-		{
-			id: 4,
-			title: "Monada",
-			desc: "Beef Patty, Bun, All-Natural Bacon, American Cheese, Swiss Cheese, Dippin' Sauce",
-			price: 1.2,
-			img: "https://m2.alothemes.com/pizzaro/media/catalog/product/cache/9d3f9ef024f4ce26174bdb3b34be3e5d/1/0/10_6.jpg",
-		},
-	];
+	// const data = [
+	// 	{
+	// 		id: 1,
+	// 		title: "Another Sample Top",
+	// 		desc: "Beef Patty, Bun, All-Natural Bacon, American Cheese, Swiss Cheese, Dippin' Sauce",
+	// 		price: 2.3,
+	// 		img: "https://m2.alothemes.com/pizzaro/media/catalog/product/cache/9d3f9ef024f4ce26174bdb3b34be3e5d/1/0/10_6.jpg",
+	// 	},
+	// 	{
+	// 		id: 2,
+	// 		title: "The Net in",
+	// 		desc: "Beef Patty, Bun, All-Natural Bacon, American Cheese, Swiss Cheese, Dippin' Sauce",
+	// 		price: 1.3,
+	// 		img: "https://m2.alothemes.com/pizzaro/media/catalog/product/cache/9d3f9ef024f4ce26174bdb3b34be3e5d/9/_/9_7.jpg",
+	// 	},
+	// 	{
+	// 		id: 3,
+	// 		title: "Quisque neque",
+	// 		desc: "Beef Patty, Bun, All-Natural Bacon, American Cheese, Swiss Cheese, Dippin' Sauce",
+	// 		price: 3.5,
+	// 		img: "https://m2.alothemes.com/pizzaro/media/catalog/product/cache/9d3f9ef024f4ce26174bdb3b34be3e5d/1/1/11_1.png",
+	// 	},
+	// 	{
+	// 		id: 4,
+	// 		title: "Monada",
+	// 		desc: "Beef Patty, Bun, All-Natural Bacon, American Cheese, Swiss Cheese, Dippin' Sauce",
+	// 		price: 1.2,
+	// 		img: "https://m2.alothemes.com/pizzaro/media/catalog/product/cache/9d3f9ef024f4ce26174bdb3b34be3e5d/1/0/10_6.jpg",
+	// 	},
+	// ];
+
+	const loc = useLocation();
+	const navigate = useNavigate();
+	const contentCategories = useSelector((state) => state.content);
+	const [data, setData] = useState([]);
+
+	useEffect(() => {
+		const settingUp = async () => {
+			switch (loc.pathname.slice(10)) {
+				case "pizzas":
+					const localDataP = await contentCategories.categories.filter(
+						(cat) => cat.categoryName === "pizzas"
+					)[0];
+					setData(localDataP);
+					console.log(localDataP);
+
+					break;
+				case "burgers":
+					const localDataB = await contentCategories.categories.filter(
+						(cat) => cat.categoryName === "burgers"
+					)[0];
+					setData(localDataB);
+					break;
+
+				default:
+					navigate("/");
+					break;
+			}
+		};
+
+		settingUp();
+	}, [loc]);
 
 	const [sortBy, setSortBy] = useState("name");
 	const [order, setOrder] = useState("up");
 	const [view, setView] = useState(0);
-	const [newData, setNewData] = useState(
-		data.sort((a, b) => (a.title < b.title ? 1 : -1))
-	);
 
 	useEffect(() => {
-		if (order === "up") {
-			switch (sortBy) {
-				case "price":
-					setNewData(newData.sort((a, b) => (a.price < b.price ? 1 : -1)));
-					break;
+		if (data.length > 0) {
+			if (order === "up") {
+				switch (sortBy) {
+					case "price":
+						setData(data.dishes.sort((a, b) => (a.price < b.price ? 1 : -1)));
+						break;
 
-				case "name":
-					setNewData(newData.sort((a, b) => (a.title > b.title ? 1 : -1)));
-					break;
-			}
-		} else {
-			switch (sortBy) {
-				case "price":
-					setNewData(newData.sort((a, b) => (a.price > b.price ? 1 : -1)));
-					break;
+					case "name":
+						setData(data.dishes.sort((a, b) => (a.title > b.title ? 1 : -1)));
+						break;
+				}
+			} else {
+				switch (sortBy) {
+					case "price":
+						setData(data.dishes.sort((a, b) => (a.price > b.price ? 1 : -1)));
+						break;
 
-				case "name":
-					setNewData(newData.sort((a, b) => (a.title < b.title ? 1 : -1)));
-					break;
+					case "name":
+						setData(data.dishes.sort((a, b) => (a.title < b.title ? 1 : -1)));
+						break;
+				}
 			}
 		}
 	}, [sortBy, order]);
@@ -85,7 +118,10 @@ const DishCategory = () => {
 
 			{/* Filtering Sec */}
 			<div className="filtering-section container-lg py-5">
-				<h3 className="display-h3">Chicken</h3>
+				<h3 className="display-h3">
+					{data?.categoryName?.slice(0, 1).toUpperCase() +
+						data?.categoryName?.slice(1)}
+				</h3>
 
 				<div className="my-4 w-100 row gap-4 gap-md-0 align-items-center justify-content-center">
 					<div className="col-12 col-md-5 col-lg-7 d-flex align-items-center gap-2">
@@ -105,7 +141,9 @@ const DishCategory = () => {
 									: "bg-light bg-gradient text-dark"
 							} rounded-5`}
 						/>
-						<span className="text-secondary fw-light">{data.length} Items</span>
+						<span className="text-secondary fw-light">
+							{data && data?.dishes?.length} Items
+						</span>
 					</div>
 					<div className="col-12 col-md-7 col-lg-5 row align-items-center">
 						<FormControl className="col w-100">
@@ -144,16 +182,20 @@ const DishCategory = () => {
 				{/* List view */}
 				<div className="listView container-lg d-flex flex-column justify-content-center align-content-center">
 					{view == 1 &&
-						newData.length > 0 &&
-						newData.map((dish) => <DishCardList key={dish.key} dish={dish} />)}
+						data?.dishes?.length > 0 &&
+						data.dishes.map((dish) => (
+							<DishCardList key={dish.key} dish={dish} />
+						))}
 				</div>
 				{/* /**** List view */}
 
 				{/* Grid View */}
 				<div className="gridView my-5 py-5 container-lg row justify-content-center gap-0 gap-md-2 gap-lg-3">
 					{view == 0 &&
-						newData.length > 0 &&
-						newData.map((dish) => <DishCardGrid key={dish.id} dish={dish} />)}
+						data?.dishes?.length > 0 &&
+						data?.dishes?.map((dish) => (
+							<DishCardGrid key={dish.id} dish={dish} />
+						))}
 				</div>
 				{/* *** Grid View */}
 			</div>

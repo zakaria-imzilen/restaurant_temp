@@ -12,7 +12,7 @@ const AllDishesSection = () => {
 				} container allDishesSection-content d-md-flex justify-content-center gap-lg-3`}
 			>
 				<div
-					onClick={() => navigate("/category")}
+					onClick={() => navigate("/category/pizzas")}
 					className="hovered row gap-2 align-items-center justify-content-center text-center"
 				>
 					<div className="col-12">
@@ -24,7 +24,7 @@ const AllDishesSection = () => {
 					<span className="col-12">Pizza</span>
 				</div>
 				<div
-					onClick={() => navigate("/category")}
+					onClick={() => navigate("/category/burgers")}
 					className="hovered row gap-2 align-items-center justify-content-center text-center"
 				>
 					<div className="col-12">
@@ -36,7 +36,7 @@ const AllDishesSection = () => {
 					<span className="col-12">Burger</span>
 				</div>
 				<div
-					onClick={() => navigate("/category")}
+					onClick={() => navigate("/category/chicken")}
 					className="hovered row gap-2 align-items-center justify-content-center text-center"
 				>
 					<div className="col-12">
@@ -48,7 +48,7 @@ const AllDishesSection = () => {
 					<span className="col-12">Chicken</span>
 				</div>
 				<div
-					onClick={() => navigate("/category")}
+					onClick={() => navigate("/category/tacos")}
 					className="hovered row gap-2 align-items-center justify-content-center text-center"
 				>
 					<div className="col-12">

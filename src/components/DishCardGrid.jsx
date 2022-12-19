@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const DishCardGrid = ({ dish }) => {
 	const navigate = useNavigate();
+	console.log(dish);
 
 	return (
 		<div
@@ -11,7 +12,7 @@ const DishCardGrid = ({ dish }) => {
 		>
 			<img src={dish.img} width={150} alt="" />
 			<h5 className="fs-6">{dish.title}</h5>
-			<span className="text-secondary fs-6">${dish.price}</span>
+			<span className="text-secondary fs-6">${dish.price.toString()}</span>
 			<div className="dishCardOnHover">
 				<p>{dish.desc}</p>
 

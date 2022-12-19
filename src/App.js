@@ -14,7 +14,7 @@ function App() {
 					<Routes>
 						<Route exact path="/" element={<Home />} />
 						<Route path="/profile" element={<ProfilePage />} />
-						<Route path="/category" element={<DishCategory />} />
+						<Route path="/category/:name" element={<DishCategory />} />
 						<Route path="/product/:id" element={<Dish />} />
 					</Routes>
 				</BrowserRouter>
