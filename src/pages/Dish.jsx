@@ -10,10 +10,13 @@ import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded";
 import { Button } from "@mui/material";
 import Footer from "../components/Footer";
+import { addToCart } from "../store/features/Cart";
+import { useDispatch } from "react-redux";
 
 const Dish = () => {
 	const loc = useLocation();
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
 	const [cartNum, setCartNum] = useState(1);
 
@@ -169,6 +172,9 @@ const Dish = () => {
 								variant="contained"
 								color="error"
 								className="rounded-5 col-4"
+								onClick={() =>
+									dispatch(addToCart({ ...myData[0], qty: cartNum }))
+								}
 							>
 								Add to cart
 							</Button>

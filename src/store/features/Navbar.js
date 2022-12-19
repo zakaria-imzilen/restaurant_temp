@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const navbar = createSlice({
+const navbar = createSlice({
 	name: "navbar",
 	initialState: {
 		menu: false,
@@ -12,5 +12,5 @@ export const navbar = createSlice({
 	},
 });
 
-export default navbar.reducer;
+export default navbar;
 export const { toggleMenu } = navbar.actions;

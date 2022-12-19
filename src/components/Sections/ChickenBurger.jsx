@@ -1,7 +1,11 @@
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Button } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../store/features/Cart";
 
 const ChickenBurger = () => {
+	const dispatch = useDispatch();
+
 	return (
 		<div className="chickenBurger container-fluid py-5">
 			<div className="py-5 chickenBurger-content container row gap-3 text-center justify-content-start">
@@ -46,6 +50,16 @@ const ChickenBurger = () => {
 						variant="contained"
 						color="error"
 						startIcon={<ShoppingCartIcon />}
+						onClick={() =>
+							dispatch(
+								addToCart({
+									id: 11,
+									title: "CHIKEN offer",
+									price: 5,
+									img: "https://m2.alothemes.com/pizzaro/media/wysiwyg/alothemes/static/demo2/img6-full.jpg",
+								})
+							)
+						}
 					>
 						ADD TO CART
 					</Button>

@@ -4,10 +4,10 @@ import { Badge, MenuItem, MenuList } from "@material-ui/core";
 import MenuRoundedIcon from "@material-ui/icons/MenuRounded";
 import Paper from "@mui/material/Paper";
 import CancelIcon from "@mui/icons-material/Cancel";
-import { Dialog, ListItemText, Typography } from "@mui/material";
+import { Button, Dialog, ListItemText, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../store/features/Navbar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CartMenu from "./CartMenu";
 import { Cancel } from "@material-ui/icons";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -15,10 +15,17 @@ import { useLocation, useNavigate } from "react-router-dom";
 const Navbar = () => {
 	const navbarRed = useSelector((state) => state.navbar);
 	const dispatch = useDispatch();
+	const cartDishes = useSelector((state) => state.cart);
 	const navigate = useNavigate();
 	const loc = useLocation();
 
 	const [cartMenu, setCartMenu] = useState(false);
+
+	useEffect(() => {
+		if (cartDishes.data.length === 0) {
+			setCartMenu(false);
+		}
+	}, [cartDishes]);
 
 	return (
 		<nav className="container-fluid py-3 p-lg-4">
@@ -46,7 +53,7 @@ const Navbar = () => {
 				</div>
 				<div className="col-12 d-flex justify-content-end align-items-center gap-5 col-lg-4 text-center">
 					<Badge
-						badgeContent={4}
+						badgeContent={cartDishes?.data.length}
 						color="error"
 						overlap="rectangular"
 						className="orderIcon position-relative"
@@ -59,8 +66,22 @@ const Navbar = () => {
 							className="py-4 cart-menu rounded-2 container col bg-light position-relative"
 							style={{ zIndex: 12 }}
 						>
-							<CartMenu />
-							<CartMenu />
+							{/* Dishes */}
+							{cartDishes?.data.map((dish) => {
+								return <CartMenu key={dish.id} dish={dish} />;
+							})}
+
+							{/* Total */}
+							<div className="text-end my-3">Total: ${cartDishes?.total}</div>
+
+							<Button
+								onClick={() => navigate("/payment")}
+								className="rounded-5"
+								variant="contained"
+								color="error"
+							>
+								Process to ordering
+							</Button>
 							<Cancel
 								className="position-absolute top-0 end-0 mt-2 me-2"
 								style={{ zIndex: 13 }}
