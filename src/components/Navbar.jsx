@@ -1,10 +1,17 @@
 import PersonIcon from "@material-ui/icons/Person";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { Badge, MenuItem, MenuList } from "@material-ui/core";
 import MenuRoundedIcon from "@material-ui/icons/MenuRounded";
 import Paper from "@mui/material/Paper";
 import CancelIcon from "@mui/icons-material/Cancel";
-import { Button, Dialog, ListItemText, Typography } from "@mui/material";
+import {
+  Badge,
+  Button,
+  Dialog,
+  ListItemText,
+  MenuItem,
+  MenuList,
+  Typography,
+} from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../store/features/Navbar";
 import { useEffect, useState } from "react";
