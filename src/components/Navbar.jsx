@@ -1,6 +1,6 @@
-import PersonIcon from "@material-ui/icons/Person";
+import PersonIcon from "@mui/icons-material/Person";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import MenuRoundedIcon from "@material-ui/icons/MenuRounded";
+import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import Paper from "@mui/material/Paper";
 import CancelIcon from "@mui/icons-material/Cancel";
 import {
@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../store/features/Navbar";
 import { useEffect, useState } from "react";
 import CartMenu from "./CartMenu";
-import { Cancel } from "@material-ui/icons";
+import { Cancel } from "@mui/icons-material";
 import { useLocation, useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../config/fbconfig";
@@ -43,12 +43,20 @@ const Navbar = () => {
   return (
     <nav className="container-fluid py-3 p-lg-4">
       <div className="container mx-auto row gap-5 gap-lg-0 justify-content-center align-items-center">
-        <div className="col-12 col-lg-4 d-flex gap-3 justify-content-start text-center">
+        <div className="col-12 col-lg-4 d-flex gap-3 justify-content-start align-items-center text-center">
           {!loc.pathname.includes("profile") && user.signedIn && (
             <PersonIcon
               style={{ color: "white" }}
               onClick={() => navigate("/profile")}
             />
+          )}
+          {!user.signedIn && (
+            <span
+              className="hovered btn text-bg-light d-none d-lg-block"
+              onClick={() => navigate("/sign")}
+            >
+              Sign in/up
+            </span>
           )}
           <span
             className="hovered text-light d-none d-lg-block"
