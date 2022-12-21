@@ -108,15 +108,24 @@ const Navbar = () => {
               className="py-4 cart-menu rounded-2 container col bg-light position-relative"
               style={{ zIndex: 12 }}
             >
+              {/* No dishes in the cart */}
+              {cartDishes?.data.length === 0 && (
+                <h3 className="m-5 text-center">
+                  No dishes in the Cart yet 🛒
+                </h3>
+              )}
+
               {/* Dishes */}
               {cartDishes?.data.map((dish) => {
                 return <CartMenu key={dish.id} dish={dish} />;
               })}
 
               {/* Total */}
-              <div className="text-end my-3">Total: ${cartDishes?.total}</div>
+              {cartDishes?.data.length > 0 && (
+                <div className="text-end my-3">Total: ${cartDishes?.total}</div>
+              )}
 
-              {user.signedIn ? (
+              {user.signedIn && cartDishes?.total > 0 && (
                 <Button
                   onClick={() => {
                     dispatch(
@@ -135,7 +144,8 @@ const Navbar = () => {
                 >
                   Process to ordering
                 </Button>
-              ) : (
+              )}
+              {cartDishes?.total > 0 && !user.signedIn && (
                 <Button
                   onClick={() => navigate("/sign")}
                   className="rounded-2"
