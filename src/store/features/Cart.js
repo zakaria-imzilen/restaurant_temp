@@ -18,21 +18,23 @@ const cart = createSlice({
               (payload.qty !== undefined ? payload.qty : 1),
             total:
               state.data.filter((dish) => dish.id === payload.id)[0].total +
-              parseFloat(payload.qty * payload.price),
+              (payload.qty * payload.price).toFixed(2),
           },
         ];
-        state.total += parseFloat(payload.qty * payload.price);
+        state.total += (payload.qty * payload.price).toFixed(2);
       } else {
         state.data.push({
           ...payload,
           qty: payload.qty !== undefined ? payload.qty : 1,
-          total: payload.price * (payload.qty || 1),
+          total: (payload.price * (payload.qty || 1)).toFixed(2),
         });
-        state.total += payload.price * (payload.qty || 1);
+        state.total += (payload.price * (payload.qty || 1)).toFixed(2);
       }
     },
     removeFromCart: (state, { payload }) => {
-      state.total -= state.data.filter((dish) => dish.id == payload)[0].price;
+      state.total -= state.data
+        .filter((dish) => dish.id == payload)[0]
+        .price.toFixed(2);
 
       if (state.data.filter((dish) => dish.id == payload)[0].qty == 1) {
         state.data = state.data.filter((dish) => dish.id != payload);
@@ -42,9 +44,10 @@ const cart = createSlice({
           {
             ...state.data.filter((dish) => dish.id == payload)[0],
             qty: state.data.filter((dish) => dish.id == payload)[0].qty - 1,
-            total:
+            total: (
               state.data.filter((dish) => dish.id == payload)[0].total -
-              state.data.filter((dish) => dish.id == payload)[0].price,
+              state.data.filter((dish) => dish.id == payload)[0].price
+            ).toFixed(2),
           },
         ];
       }
