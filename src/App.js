@@ -9,6 +9,7 @@ import Sign from "./pages/Sign";
 import { store } from "./store/store";
 
 function App() {
+
   return (
     <div className="app">
       <Provider store={store}>
@@ -18,7 +19,7 @@ function App() {
             <Route exact path="/" element={<Home />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/category/:name" element={<DishCategory />} />
-            <Route path="/product/:id" element={<Dish />} />
+            <Route path="/product/:category/:id" element={<Dish />} />
             <Route path="/sign" element={<Sign />} />
           </Routes>
         </BrowserRouter>

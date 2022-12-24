@@ -3,7 +3,10 @@ import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../config/fbconfig";
 
 export const ordering = createAsyncThunk("ordering", async (orderDetails) => {
-  const res = await addDoc(collection(db, "orders"), orderDetails);
+  const res = await addDoc(collection(db, "orders"), {
+    ...orderDetails,
+    status: false,
+  });
   return res;
 });
 

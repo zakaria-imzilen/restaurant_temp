@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../store/features/Navbar";
+import { getContent, insertContent } from "../store/features/Content";
 import { useEffect, useState } from "react";
 import CartMenu from "./CartMenu";
 import { Cancel } from "@mui/icons-material";
@@ -35,10 +36,8 @@ const Navbar = () => {
   const [cartMenu, setCartMenu] = useState(false);
 
   useEffect(() => {
-    if (cartDishes.data.length === 0) {
-      setCartMenu(false);
-    }
-  }, [cartDishes]);
+    dispatch(getContent());
+  }, []);
 
   return (
     <nav className="container-fluid py-3 p-lg-4">
@@ -117,12 +116,14 @@ const Navbar = () => {
 
               {/* Dishes */}
               {cartDishes?.data.map((dish) => {
-                return <CartMenu key={dish.id} dish={dish} />;
+                return <CartMenu key={dish.title} dish={dish} />;
               })}
 
               {/* Total */}
               {cartDishes?.data.length > 0 && (
-                <div className="text-end my-3">Total: ${cartDishes?.total}</div>
+                <div className="text-end my-3">
+                  Total: ${cartDishes?.total.toFixed(2)}
+                </div>
               )}
 
               {user.signedIn && cartDishes?.total > 0 && (

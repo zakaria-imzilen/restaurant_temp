@@ -8,6 +8,8 @@ import { auth } from "../config/fbconfig";
 import "../css/Profile.css";
 import { myOrders } from "../store/features/Order";
 import { signIn } from "../store/features/user";
+import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
+import UnpublishedRoundedIcon from "@mui/icons-material/UnpublishedRounded";
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
@@ -36,39 +38,6 @@ const ProfilePage = () => {
     });
   }, []);
 
-  //   const data = {
-  //     name: "Zakaria",
-  //     orders: [
-  //       {
-  //         id: 1,
-  //         title: "Burger Cheese",
-  //         qty: 2,
-  //         price: 16,
-  //         img: "https://m2.alothemes.com/pizzaro/media/catalog/product/cache/2a7987c13a346cdbe055af26c7fc6478/2/_/2_2.png",
-  //       },
-  //       {
-  //         id: 2,
-  //         title: "Burger Cheese",
-  //         qty: 1,
-  //         price: 8,
-  //         img: "https://m2.alothemes.com/pizzaro/media/catalog/product/cache/2a7987c13a346cdbe055af26c7fc6478/2/_/2_2.png",
-  //       },
-  //       {
-  //         id: 3,
-  //         title: "Burger Cheese",
-  //         qty: 4,
-  //         price: 24,
-  //         img: "https://m2.alothemes.com/pizzaro/media/catalog/product/cache/2a7987c13a346cdbe055af26c7fc6478/2/_/2_2.png",
-  //       },
-  //     ],
-  //     info: {
-  //       fullName: "Zakaria Imzilen",
-  //       email: "zakaria@gmail.com",
-  //       address: "AV MLY Youssef SLJ",
-  //       city: "SLJ",
-  //     },
-  //   };
-
   return (
     <div className="profile_page container-fluid p-0" data-aos="fade-in">
       {checkNow && <CheckingSign />}
@@ -83,27 +52,52 @@ const ProfilePage = () => {
         </div>
       </div>
 
-      <div className="row justify-content-center align-content-center align-items-center gap-3 gap-lg-4 mx-auto container-lg">
-        <div className="col-10 col-lg-5 shadow-none p-3 mb-5 bg-light rounded-1">
+      <div className="row justify-content-center align-content-center align-items-start gap-3 gap-lg-4 mx-auto container-lg">
+        <div className="col-10 col-lg-7 col-xl-6 shadow-none p-3 mb-5 bg-light rounded-1">
           <h5>Your Recent orders</h5>
           <ul className="my-3 list-group list-group-flush">
-            {order.gettingMyOrders !== "pending" &&
-              console.log(order.gettingMyOrders)}
             {user.signedIn &&
               typeof order.gettingMyOrders === "object" &&
-              order.gettingMyOrders.map((order) => (
+              order.gettingMyOrders.map((orders) => (
                 <li
-                  key={order.id}
-                  className="list-group-item d-flex justify-content-around align-items-center"
+                  key={orders.id}
+                  className="m-0 py-3 list-group-item d-flex flex-column gap-2 justify-content-between align-items-end"
                 >
-                  <img
-                    src={order.order[0].img}
-                    alt={order.order[0].title}
-                    width={30}
-                  />
-                  <span>{order.order[0].title}</span>
-                  <span className="text-secondary">
-                    x{order.order[0].qty} = {order.order[0].price}$
+                  {orders.order.map((order) => (
+                    <article
+                      key={`${order.title}${order.qty}`}
+                      className="m-0 w-100 row justify-content-around align-items-center"
+                    >
+                      <img
+                        className="col-2"
+                        src={order.imgs[0]}
+                        alt={order.title}
+                        // width={30}
+                      />
+                      <span className="col-3">{order.title}</span>
+                      <span
+                        className="text-secondary col-3"
+                        // style={{ fontSize: ".62rem" }}
+                      >
+                        ${order.price}x{order.qty}
+                      </span>
+                      {orders.status ? (
+                        <CheckCircleRoundedIcon
+                          color="success"
+                          style={{ fontSize: "3.1rem" }}
+                          className="col-2"
+                        />
+                      ) : (
+                        <UnpublishedRoundedIcon
+                          color="error"
+                          style={{ fontSize: "3.1rem" }}
+                          className="col-2"
+                        />
+                      )}
+                    </article>
+                  ))}
+                  <span className="text-end text-secondary">
+                    Total: ${orders.total.toFixed(2)}
                   </span>
                 </li>
               ))}

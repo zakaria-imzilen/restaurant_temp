@@ -1,70 +1,88 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {
+  addDoc,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  setDoc,
+  where,
+} from "firebase/firestore";
+import { db } from "../../config/fbconfig";
+
+// export const insertContent = createAsyncThunk("insertContent", async () => {
+//   await setDoc(doc(db, "content", "burgers"), {
+//     data: [
+//       {
+//         title: "Country Burger",
+//         price: 8.9,
+//         desc: "Beef Patty, Bun, All-Natural Bacon, American Cheese, Swiss Cheese, Dippin' Sauce",
+//         imgs: [
+//           "https://m2.alothemes.com/pizzaro/media/catalog/product/cache/d500e214958dbc08ac65dad036025b47/2/_/2_2.png",
+//           "https://m2.alothemes.com/pizzaro/media/catalog/product/cache/d500e214958dbc08ac65dad036025b47/3/_/3_1_16.jpg",
+//         ],
+//       },
+//       {
+//         title: "Mushroom Burger",
+//         price: 2.9,
+//         desc: "Beef Patty, Bun, All-Natural Bacon, American Cheese, Swiss Cheese, Dippin' Sauce",
+//         imgs: [
+//           "https://m2.alothemes.com/pizzaro/media/catalog/product/cache/2a7987c13a346cdbe055af26c7fc6478/4/_/4_2.png",
+//           "https://m2.alothemes.com/pizzaro/media/catalog/product/cache/2a7987c13a346cdbe055af26c7fc6478/5/_/5_1_16.jpg",
+//         ],
+//       },
+//       {
+//         title: "Cheese Butter Burger",
+//         price: 9.9,
+//         desc: "Beef Patty, Bun, All-Natural Bacon, American Cheese, Swiss Cheese, Dippin' Sauce",
+//         imgs: [
+//           "https://m2.alothemes.com/pizzaro/media/catalog/product/cache/2a7987c13a346cdbe055af26c7fc6478/7/_/7_17.jpg",
+//           "https://m2.alothemes.com/pizzaro/media/catalog/product/cache/2a7987c13a346cdbe055af26c7fc6478/8/_/8_14.jpg",
+//         ],
+//       },
+//     ],
+//   });
+// });
+
+export const getContent = createAsyncThunk("getContent", async () => {
+  const queryName = query(collection(db, "content"));
+  const snapShot = await getDocs(queryName);
+
+  return snapShot.docs;
+});
 
 const content = createSlice({
-	name: "content",
-	initialState: {
-		categories: [
-			{
-				categoryName: "burgers",
-				dishes: [
-					{
-						id: 1,
-						title: "Another Sample Top",
-						desc: "Beef Patty, Bun, All-Natural Bacon, American Cheese, Swiss Cheese, Dippin' Sauce",
-						price: 2.3,
-						img: "https://m2.alothemes.com/pizzaro/media/catalog/product/cache/9d3f9ef024f4ce26174bdb3b34be3e5d/1/0/10_6.jpg",
-					},
-					{
-						id: 2,
-						title: "The Net in",
-						desc: "Beef Patty, Bun, All-Natural Bacon, American Cheese, Swiss Cheese, Dippin' Sauce",
-						price: 1.3,
-						img: "https://m2.alothemes.com/pizzaro/media/catalog/product/cache/9d3f9ef024f4ce26174bdb3b34be3e5d/9/_/9_7.jpg",
-					},
-					{
-						id: 3,
-						title: "Quisque neque",
-						desc: "Beef Patty, Bun, All-Natural Bacon, American Cheese, Swiss Cheese, Dippin' Sauce",
-						price: 3.5,
-						img: "https://m2.alothemes.com/pizzaro/media/catalog/product/cache/9d3f9ef024f4ce26174bdb3b34be3e5d/1/1/11_1.png",
-					},
-				],
-			},
-			{
-				categoryName: "pizzas",
-				dishes: [
-					{
-						id: 1,
-						title: "Another Sample Top",
-						desc: "Beef Patty, Bun, All-Natural Bacon, American Cheese, Swiss Cheese, Dippin' Sauce",
-						price: 2.3,
-						img: "https://m2.alothemes.com/pizzaro/media/catalog/product/cache/9d3f9ef024f4ce26174bdb3b34be3e5d/1/0/10_6.jpg",
-					},
-					{
-						id: 2,
-						title: "The Net in",
-						desc: "Beef Patty, Bun, All-Natural Bacon, American Cheese, Swiss Cheese, Dippin' Sauce",
-						price: 1.3,
-						img: "https://m2.alothemes.com/pizzaro/media/catalog/product/cache/9d3f9ef024f4ce26174bdb3b34be3e5d/9/_/9_7.jpg",
-					},
-					{
-						id: 3,
-						title: "Quisque neque",
-						desc: "Beef Patty, Bun, All-Natural Bacon, American Cheese, Swiss Cheese, Dippin' Sauce",
-						price: 3.5,
-						img: "https://m2.alothemes.com/pizzaro/media/catalog/product/cache/9d3f9ef024f4ce26174bdb3b34be3e5d/1/1/11_1.png",
-					},
-					{
-						id: 4,
-						title: "Monada",
-						desc: "Beef Patty, Bun, All-Natural Bacon, American Cheese, Swiss Cheese, Dippin' Sauce",
-						price: 1.2,
-						img: "https://m2.alothemes.com/pizzaro/media/catalog/product/cache/9d3f9ef024f4ce26174bdb3b34be3e5d/1/0/10_6.jpg",
-					},
-				],
-			},
-		],
-	},
+  name: "content",
+  initialState: {
+    categories: [],
+    dish: null,
+  },
+  reducers: {
+    getDish: (state, { title, cat }) => {
+      let num;
+      if (cat === "burgers") {
+        num = 0;
+      } else if (cat === "pizzas") {
+        num = 1;
+      }
+      state.dish = state.categories[1]
+        .data()
+        .data.filter((dish) => dish.title === title);
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(getContent.fulfilled, ({ categories }, { payload }) => {
+      categories.push(...payload);
+    });
+    builder.addCase(getContent.pending, ({ categories }) => {
+      categories = "pending";
+    });
+    builder.addCase(getContent.rejected, ({ categories }) => {
+      categories = false;
+    });
+  },
 });
 
 export default content;
+export const { getDish } = content.actions;

@@ -8,46 +8,52 @@ const cart = createSlice({
   },
   reducers: {
     addToCart: (state, { payload }) => {
-      if (state.data.filter((dish) => dish.id === payload.id).length > 0) {
+      const itemFound = state.data.filter(
+        (dish) => dish.title === payload.title
+      );
+      // Second,.. time
+      if (itemFound.length > 0) {
         state.data = [
-          ...state.data.filter((dish) => dish.id !== payload.id),
+          ...state.data.filter((dish) => dish.title !== payload.title),
           {
             ...payload,
             qty:
-              state.data.filter((dish) => dish.id === payload.id)[0].qty +
-              (payload.qty !== undefined ? payload.qty : 1),
-            total:
-              state.data.filter((dish) => dish.id === payload.id)[0].total +
-              (payload.qty * payload.price).toFixed(2),
+              itemFound[0].qty + (payload.qty !== undefined ? payload.qty : 1),
+            total: parseFloat(
+              itemFound[0].total +
+                parseFloat((payload.qty * itemFound[0].price).toFixed(2))
+            ),
           },
         ];
-        state.total += (payload.qty * payload.price).toFixed(2);
+        state.total += parseFloat(
+          parseFloat((payload.qty * itemFound[0].price).toFixed(2))
+        );
       } else {
+        // First time
         state.data.push({
           ...payload,
-          qty: payload.qty !== undefined ? payload.qty : 1,
-          total: (payload.price * (payload.qty || 1)).toFixed(2),
+          total: parseFloat(payload.price),
         });
-        state.total += (payload.price * (payload.qty || 1)).toFixed(2);
+        state.total += parseFloat(payload.price);
       }
     },
     removeFromCart: (state, { payload }) => {
-      state.total -= state.data
-        .filter((dish) => dish.id == payload)[0]
-        .price.toFixed(2);
+      // item is here
+      const itemFound = state.data.filter((dish) => dish.title === payload);
 
-      if (state.data.filter((dish) => dish.id == payload)[0].qty == 1) {
-        state.data = state.data.filter((dish) => dish.id != payload);
+      state.total -= itemFound[0].price;
+
+      // Remove the whole item
+      if (itemFound[0].qty === 1) {
+        state.data = state.data.filter((dish) => dish.title !== payload);
       } else {
+        // Decrease qty
         state.data = [
-          ...state.data.filter((dish) => dish.id !== payload),
+          ...state.data.filter((dish) => dish.title !== payload),
           {
-            ...state.data.filter((dish) => dish.id == payload)[0],
-            qty: state.data.filter((dish) => dish.id == payload)[0].qty - 1,
-            total: (
-              state.data.filter((dish) => dish.id == payload)[0].total -
-              state.data.filter((dish) => dish.id == payload)[0].price
-            ).toFixed(2),
+            ...itemFound[0],
+            qty: itemFound[0].qty - 1,
+            total: parseFloat(itemFound[0].total - itemFound[0].price),
           },
         ];
       }
