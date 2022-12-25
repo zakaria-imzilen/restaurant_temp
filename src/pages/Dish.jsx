@@ -13,6 +13,7 @@ import Footer from "../components/Footer";
 import { addToCart } from "../store/features/Cart";
 import { useDispatch, useSelector } from "react-redux";
 import { getDish } from "../store/features/Content";
+import { addAlert } from "../store/features/Alert";
 
 const Dish = () => {
   const params = useParams();
@@ -195,7 +196,10 @@ const Dish = () => {
               variant="contained"
               color="error"
               className="rounded-5 col-4"
-              onClick={() => dispatch(addToCart({ ...data[0], qty: cartNum }))}
+              onClick={() => {
+                dispatch(addToCart({ ...data[0], qty: cartNum }));
+                dishData(addAlert(3));
+              }}
             >
               Add to cart
             </Button>

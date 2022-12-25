@@ -2,6 +2,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { auth } from "../config/fbconfig";
+import { addAlert } from "../store/features/Alert";
 import { signIn } from "../store/features/user";
 
 const CapturingUser = () => {
@@ -18,6 +19,7 @@ const CapturingUser = () => {
             photoURL: user.photoURL,
           })
         );
+        dispatch(addAlert(0));
       }
     });
   }, []);

@@ -2,6 +2,7 @@ import ShoppingBasketOutlinedIcon from "@mui/icons-material/ShoppingBasketOutlin
 import { Button } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { addAlert } from "../store/features/Alert";
 import { addToCart } from "../store/features/Cart";
 
 const DishCard = ({ dish, category }) => {
@@ -24,9 +25,10 @@ const DishCard = ({ dish, category }) => {
         </p>
         <h3 className="mb-3">${dish.price}</h3>
         <Button
-          onClick={() =>
-            dispatch(addToCart({ ...dish, qty: 1, total: dish.price }))
-          }
+          onClick={() => {
+            dispatch(addToCart({ ...dish, qty: 1, total: dish.price }));
+            dispatch(addAlert(3));
+          }}
           startIcon={<ShoppingBasketOutlinedIcon />}
           className="rounded-5"
           variant="contained"

@@ -58,8 +58,12 @@ const cart = createSlice({
         ];
       }
     },
+    resetCart: (state) => {
+      state.data = [];
+      state.total = 0;
+    },
   },
 });
 
 export default cart;
-export const { addToCart, removeFromCart } = cart.actions;
+export const { addToCart, removeFromCart, resetCart } = cart.actions;

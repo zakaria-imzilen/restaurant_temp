@@ -23,6 +23,8 @@ import { signOut } from "firebase/auth";
 import { auth } from "../config/fbconfig";
 import { signingOut } from "../store/features/user";
 import { ordering } from "../store/features/Order";
+import { addAlert, removeAlert } from "../store/features/Alert";
+import { resetCart } from "../store/features/Cart";
 
 const Navbar = () => {
   const navbarRed = useSelector((state) => state.navbar);
@@ -96,6 +98,7 @@ const Navbar = () => {
               onClick={() => {
                 dispatch(signingOut());
                 signOut(auth);
+                dispatch(removeAlert(1));
               }}
             >
               Sign out
@@ -137,7 +140,10 @@ const Navbar = () => {
                         timestamp: new Date().getDate(),
                       })
                     );
+                    setCartMenu(false);
                     navigate("/profile");
+                    dispatch(addAlert(2));
+                    dispatch(resetCart());
                   }}
                   className="rounded-5"
                   variant="contained"

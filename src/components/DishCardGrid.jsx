@@ -1,6 +1,7 @@
 import { Button } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { addAlert } from "../store/features/Alert";
 import { addToCart } from "../store/features/Cart";
 
 const DishCardGrid = ({ dish, category }) => {
@@ -21,9 +22,10 @@ const DishCardGrid = ({ dish, category }) => {
         <p>{dish.desc}</p>
 
         <Button
-          onClick={() =>
-            dispatch(addToCart({ ...dish, qty: 1, total: dish.price }))
-          }
+          onClick={() => {
+            dispatch(addToCart({ ...dish, qty: 1, total: dish.price }));
+            dispatch(addAlert(3));
+          }}
           variant="contained"
           color="error"
           className="rounded-5"

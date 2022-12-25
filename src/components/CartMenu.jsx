@@ -2,12 +2,13 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { IconButton } from "@mui/material";
 import { useDispatch } from "react-redux";
+import { addAlert } from "../store/features/Alert";
 import { addToCart, removeFromCart } from "../store/features/Cart";
 
 const CartMenu = ({ dish }) => {
-	const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-	return (
+  return (
     <div className="cart-menu-item row justify-content-center align-items-center py-2 px-2 px-md-4">
       <div className="col-3">
         <img src={dish.imgs[0]} alt="" width={40} className="w-100 m-0" />
@@ -20,7 +21,10 @@ const CartMenu = ({ dish }) => {
         <IconButton
           aria-label="add"
           style={{ fontSize: ".8rem", padding: ".2rem" }}
-          onClick={() => dispatch(addToCart({ ...dish, qty: 1 }))}
+          onClick={() => {
+            dispatch(addToCart({ ...dish, qty: 1 }));
+            dispatch(addAlert(3));
+          }}
         >
           <AddIcon fontSize="inherit" color="primary" />
         </IconButton>
@@ -34,7 +38,7 @@ const CartMenu = ({ dish }) => {
       </div>
       <div className="col-4 text-end">
         <p className="m-0">{dish.price}$</p>
-        <p className="m-0">Total: {dish.total}$</p>
+        <p className="m-0">Total: {dish.total.toFixed(2)}$</p>
       </div>
     </div>
   );

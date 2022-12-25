@@ -60,15 +60,15 @@ const content = createSlice({
   },
   reducers: {
     getDish: (state, { title, cat }) => {
-      let num;
       if (cat === "burgers") {
-        num = 0;
+        state.dish = state.categories[0]
+          .data()
+          .data.filter((dish) => dish.title === title);
       } else if (cat === "pizzas") {
-        num = 1;
+        state.dish = state.categories[1]
+          .data()
+          .data.filter((dish) => dish.title === title);
       }
-      state.dish = state.categories[1]
-        .data()
-        .data.filter((dish) => dish.title === title);
     },
   },
   extraReducers: (builder) => {
