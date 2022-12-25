@@ -56,8 +56,8 @@ const ProfilePage = () => {
         <div className="col-10 col-lg-7 col-xl-6 shadow-none p-3 mb-5 bg-light rounded-1">
           <h5>Your Recent orders</h5>
           <ul className="my-3 list-group list-group-flush">
-            {user.signedIn &&
-              typeof order.gettingMyOrders === "object" &&
+            {order.gettingMyOrders !== "pending" &&
+              order.gettingMyOrders !== null &&
               order.gettingMyOrders.map((orders) => (
                 <li
                   key={orders.id}
@@ -72,13 +72,9 @@ const ProfilePage = () => {
                         className="col-2"
                         src={order.imgs[0]}
                         alt={order.title}
-                        // width={30}
                       />
                       <span className="col-3">{order.title}</span>
-                      <span
-                        className="text-secondary col-3"
-                        // style={{ fontSize: ".62rem" }}
-                      >
+                      <span className="text-secondary col-3">
                         ${order.price}x{order.qty}
                       </span>
                       {orders.status ? (
@@ -101,6 +97,49 @@ const ProfilePage = () => {
                   </span>
                 </li>
               ))}
+            {/* {user.signedIn &&
+              typeof order.gettingMyOrders === "object" &&
+              order.gettingMyOrders.map((orders) => (
+                <li
+                  key={orders.id}
+                  className="m-0 py-3 list-group-item d-flex flex-column gap-2 justify-content-between align-items-end"
+                >
+                  {orders.order.map((order) => (
+                    <article
+                      key={`${order.title}${order.qty}`}
+                      className="m-0 w-100 row justify-content-around align-items-center"
+                    >
+                      <img
+                        className="col-2"
+                        src={order.imgs[0]}
+                        alt={order.title}
+                      />
+                      <span className="col-3">{order.title}</span>
+                      <span
+                        className="text-secondary col-3"
+                      >
+                        ${order.price}x{order.qty}
+                      </span>
+                      {orders.status ? (
+                        <CheckCircleRoundedIcon
+                          color="success"
+                          style={{ fontSize: "3.1rem" }}
+                          className="col-2"
+                        />
+                      ) : (
+                        <UnpublishedRoundedIcon
+                          color="error"
+                          style={{ fontSize: "3.1rem" }}
+                          className="col-2"
+                        />
+                      )}
+                    </article>
+                  ))}
+                  <span className="text-end text-secondary">
+                    Total: ${orders.total.toFixed(2)}
+                  </span>
+                </li>
+              ))} */}
           </ul>
         </div>
         <div className="col-10 info-content col-lg-5 shadow-none p-3 mb-5 text-bg-warning rounded-1">
