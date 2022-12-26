@@ -1,13 +1,13 @@
 # Tasks to accomplish
 --- JSX
 - ✅ Contact US Page
-- ✒ Error 404 Page
+- ✅ Error 404 Page
 - Show up another page to add extra infos (address, city)
 - Profile Page:
     - Edit my infos
 - ✅ Alerting
 - Back office
-- Fix Dish page rendering
+- ✅ Fix Dish page rendering
 
 --- Redux
 - Show up another page to add extra infos (address, city)

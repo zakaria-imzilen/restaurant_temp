@@ -2,6 +2,7 @@ import { Provider } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Alerting from "./components/Alerting";
 import CapturingUser from "./components/CapturingUser";
+import Error404 from "./pages/404";
 import Contact from "./pages/Contact";
 import Dish from "./pages/Dish";
 import DishCategory from "./pages/DishCategory";
@@ -24,6 +25,7 @@ function App() {
             <Route path="/category/:name" element={<DishCategory />} />
             <Route path="/product/:category/:id" element={<Dish />} />
             <Route path="/sign" element={<Sign />} />
+            <Route path="*" element={<Error404 />} />
           </Routes>
         </BrowserRouter>
       </Provider>

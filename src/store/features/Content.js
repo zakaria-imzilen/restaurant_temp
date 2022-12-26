@@ -59,15 +59,15 @@ const content = createSlice({
     dish: null,
   },
   reducers: {
-    getDish: (state, { title, cat }) => {
-      if (cat === "burgers") {
+    getDish: (state, { payload }) => {
+      if (payload.cat === "burgers") {
         state.dish = state.categories[0]
           .data()
-          .data.filter((dish) => dish.title === title);
-      } else if (cat === "pizzas") {
+          .data.filter((dish) => dish.title === payload.title)[0];
+      } else if (payload.cat === "pizzas") {
         state.dish = state.categories[1]
           .data()
-          .data.filter((dish) => dish.title === title);
+          .data.filter((dish) => dish.title === payload.title)[0];
       }
     },
   },

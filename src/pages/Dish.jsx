@@ -21,7 +21,7 @@ const Dish = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const data = useSelector((state) => state.content.categories);
-  const [dishData, setDishData] = useState({});
+  const dishData = useSelector((state) => state.content.dish);
 
   useEffect(() => {
     if (data.length > 0) {
@@ -124,26 +124,17 @@ const Dish = () => {
             <div className="carousel-inner">
               <div className="carousel-item active">
                 <img
-                  src="https://m2.alothemes.com/pizzaro/media/catalog/product/cache/d500e214958dbc08ac65dad036025b47/1/1/11_4.jpg"
+                  src={dishData?.imgs[0]}
                   className="d-block w-100"
                   alt="..."
                   width={200}
                 />
               </div>
-              <div className="carousel-item">
-                <img
-                  src="https://m2.alothemes.com/pizzaro/media/catalog/product/cache/d500e214958dbc08ac65dad036025b47/7/_/7_11.jpg"
-                  className="d-block w-100"
-                  alt="..."
-                />
-              </div>
-              <div className="carousel-item">
-                <img
-                  src="https://m2.alothemes.com/pizzaro/media/catalog/product/cache/d500e214958dbc08ac65dad036025b47/6/_/6_1_12.jpg"
-                  className="d-block w-100"
-                  alt="..."
-                />
-              </div>
+              {dishData?.imgs.map((img) => (
+                <div className="carousel-item">
+                  <img src={img} className="d-block w-100" alt="..." />
+                </div>
+              ))}
             </div>
             <button
               className="carousel-control-prev"
