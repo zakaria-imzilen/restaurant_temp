@@ -8,8 +8,10 @@ const AllDishesSection = () => {
     <section className="py-4 px-5 allDishesSection position-sticky top-0 text-light container-fluid d-md-block">
       <div
         className={`${
-          loc.pathname.includes("category") && "border-top border-light pt-3"
-        } container allDishesSection-content d-md-flex justify-content-center gap-lg-3`}
+          loc.pathname.includes("category")
+            ? "border-top border-light pt-3"
+            : ""
+        } container-lg allDishesSection-content d-md-flex justify-content-center gap-lg-3`}
       >
         <div
           onClick={() => navigate("/category/pizzas")}

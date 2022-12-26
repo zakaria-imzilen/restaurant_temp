@@ -41,7 +41,7 @@ const Sign = () => {
   }, []);
 
   return (
-    <div className="position-absolute top-50 start-50 translate-middle">
+    <div className="container-lg position-absolute top-50 start-50 translate-middle">
       <h1 className="text-center fs-4 mb-5">
         You can register/sign in your account the easiest way
       </h1>

@@ -204,7 +204,10 @@ const Navbar = () => {
                     {!user.signedIn && (
                       <Typography
                         fontSize={46}
-                        onClick={() => navigate("/sign")}
+                        onClick={() => {
+                          dispatch(toggleMenu());
+                          navigate("/sign");
+                        }}
                       >
                         Sign in/up
                       </Typography>
@@ -215,7 +218,10 @@ const Navbar = () => {
                   <ListItemText className="w-100 text-center">
                     <Typography
                       fontSize={46}
-                      onClick={() => navigate("/about")}
+                      onClick={() => {
+                        dispatch(toggleMenu());
+                        navigate("/about");
+                      }}
                     >
                       About
                     </Typography>
@@ -225,7 +231,10 @@ const Navbar = () => {
                   <ListItemText className="w-100 text-center">
                     <Typography
                       fontSize={46}
-                      onClick={() => navigate("/contact")}
+                      onClick={() => {
+                        dispatch(toggleMenu());
+                        navigate("/contact");
+                      }}
                     >
                       Contact
                     </Typography>

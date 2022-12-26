@@ -88,9 +88,6 @@ header h2 {
 .allDishesSection {
 	z-index: 9;
 }
-.allDishesSection-content {
-	width: 25rem !important;
-}
 /* <--- AllDishesSection --/> */
 
 /* Chicken Burger */
