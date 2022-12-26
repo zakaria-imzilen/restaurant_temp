@@ -188,8 +188,8 @@ const Dish = () => {
               color="error"
               className="rounded-5 col-4"
               onClick={() => {
-                dispatch(addToCart({ ...data[0], qty: cartNum }));
-                dishData(addAlert(3));
+                dispatch(addToCart({ ...dishData, qty: cartNum }));
+                dispatch(addAlert(3));
               }}
             >
               Add to cart

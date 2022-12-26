@@ -20,8 +20,7 @@ const cart = createSlice({
             qty:
               itemFound[0].qty + (payload.qty !== undefined ? payload.qty : 1),
             total: parseFloat(
-              itemFound[0].total +
-                parseFloat((payload.qty * itemFound[0].price).toFixed(2))
+              itemFound[0].total + parseFloat(payload.qty * itemFound[0].price)
             ),
           },
         ];
@@ -32,16 +31,16 @@ const cart = createSlice({
         // First time
         state.data.push({
           ...payload,
-          total: parseFloat(payload.price),
+          total: parseFloat(payload.price * (payload.qty || 1)),
         });
-        state.total += parseFloat(payload.price);
+        state.total += parseFloat(payload.price * (payload.qty || 1));
       }
     },
     removeFromCart: (state, { payload }) => {
       // item is here
       const itemFound = state.data.filter((dish) => dish.title === payload);
 
-      state.total -= itemFound[0].price;
+      state.total -= parseFloat(itemFound[0].price);
 
       // Remove the whole item
       if (itemFound[0].qty === 1) {
