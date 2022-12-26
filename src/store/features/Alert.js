@@ -39,6 +39,21 @@ export const alert = createSlice({
           text = "Removed from cart ❌";
           color = "error";
           break;
+        case 5:
+          // id = 5  ---> Mistake found on Contact us
+          text = "Mistakes found on inputs";
+          color = "error";
+          break;
+        case 6:
+          // id = 6  ---> Message sent
+          text = "Message sent successfuly";
+          color = "success";
+          break;
+        case 7:
+          // id = 7  ---> Message not sent
+          text = "Message not sent. Try again !";
+          color = "error";
+          break;
       }
 
       alerts.push({ id: payload, text, color });

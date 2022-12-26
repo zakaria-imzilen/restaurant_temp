@@ -4,8 +4,9 @@
 - Show up another page to add extra infos (address, city)
 - Profile Page:
     - Edit my infos
-- Alerting
+- ✅ Alerting
 - Back office
+- Fix Dish page rendering
 
 --- Redux
 - Show up another page to add extra infos (address, city)
@@ -13,8 +14,8 @@
     - Fix timestamp
 - Profile Page:
     - Edit my infos
-- Alerting
-- Feature: Contact us
+- ✅ Alerting
+- ✅ Feature: Contact us
 - Back office
     - Consulting orders
     - CRUD for orders
@@ -24,7 +25,5 @@
 - Insert into FIRESTORE:
     - Chicken Content
     - Tacos Content
-
-
 
 # Advanced Features

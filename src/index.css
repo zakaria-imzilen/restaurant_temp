@@ -8,6 +8,10 @@ body {
 	overflow-x: hidden;
 }
 
+.app {
+	background-color: #c00a27;
+
+}
 a {
 	color: inherit !important;
 	text-decoration: none !important;
@@ -29,4 +33,8 @@ a {
 
 .heightBlanket {
 	height: 10rem;
+}
+
+.MuiFormLabel-root {
+	font-family: Unbounded !important;
 }

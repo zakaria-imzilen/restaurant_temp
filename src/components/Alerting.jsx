@@ -17,9 +17,12 @@ const Alerting = () => {
 
   if (alerts.length > 0) {
     return (
-      <div className="container-lg row gap-2 position-absolute top-0 start-50 translate-middle-x bg-transparent">
+      <div
+        style={{ backgroundColor: "transparent !important", zIndex: 40 }}
+        className="container-lg row gap-2 position-sticky top-0 m-auto bg-opacity-0"
+      >
         {alerts.map((al) => (
-          <Alert className="mx-auto col-12" severity={al.color}>
+          <Alert key={al.id} className="mx-auto col-12" severity={al.color}>
             {al.text}
           </Alert>
         ))}

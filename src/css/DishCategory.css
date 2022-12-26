@@ -1,3 +1,6 @@
+.dishCategory-page {
+	background-color: #fff;
+}
 @media all and (min-width: 992px) {
 	nav {
 		position: static !important;

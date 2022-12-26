@@ -1,6 +1,7 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { alert } from "./features/Alert";
 import cart from "./features/Cart";
+import contact from "./features/Contact";
 import content from "./features/Content";
 import navbar from "./features/Navbar";
 import order from "./features/Order";
@@ -14,6 +15,7 @@ export const store = configureStore({
     user: user.reducer,
     order: order.reducer,
     alert: alert.reducer,
+    contact: contact.reducer,
   },
   middleware: getDefaultMiddleware({
     serializableCheck: false,
