@@ -8,10 +8,12 @@
 - ✅ Alerting
 - Back office
 - ✅ Fix Dish page rendering
+- 🖋 Page to process order (take order adress details)
 
 --- Redux
 - Show up another page to add extra infos (address, city)
-- Edit the ordering insert:
+- Page to process order (take order adress details)
+- ✅ Edit the ordering insert:
     - Fix timestamp
 - Profile Page:
     - Edit my infos
@@ -22,7 +24,7 @@
     - CRUD for orders
 
 --- Firebase
-- Create a new collection called "users" {uid: "53563526wad6sd", address, city}
+- ✅ Create a new collection called "users" {uid: "53563526wad6sd", Full Name, address, city}
 - Insert into FIRESTORE:
     - Chicken Content
     - Tacos Content

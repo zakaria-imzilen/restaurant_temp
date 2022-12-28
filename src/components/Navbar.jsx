@@ -25,6 +25,7 @@ import { signingOut } from "../store/features/user";
 import { ordering } from "../store/features/Order";
 import { addAlert, removeAlert } from "../store/features/Alert";
 import { resetCart } from "../store/features/Cart";
+import { Timestamp } from "firebase/firestore";
 
 const Navbar = () => {
   const navbarRed = useSelector((state) => state.navbar);
@@ -137,7 +138,7 @@ const Navbar = () => {
                         order: cart.data,
                         total: cart.total,
                         uid: user.credentials.uid,
-                        timestamp: new Date().getDate(),
+                        timestamp: Timestamp.fromDate(new Date()).toDate(),
                       })
                     );
                     setCartMenu(false);

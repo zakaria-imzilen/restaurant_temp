@@ -58,6 +58,7 @@ const ProfilePage = () => {
           <ul className="my-3 list-group list-group-flush">
             {order.gettingMyOrders !== "pending" &&
               order.gettingMyOrders !== null &&
+              typeof order.gettingMyOrders === "object" &&
               order.gettingMyOrders.map((orders) => (
                 <li
                   key={orders.id}
